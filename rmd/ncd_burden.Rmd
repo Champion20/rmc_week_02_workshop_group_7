@@ -14,16 +14,32 @@ data_ncd <- read_csv(here("data", "burden-of-disease-ncd.csv"))
 # Here render a table for the DALY burden over time for the three countries 
 # You should pivot the data to show each country in a separate column.
 # Use kable() from the knitr package to render the table.
+data_ncd_clean <- data_ncd %>% filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% clean_names() %>% 
+  rename(DALYS = "dal_ys_disability_adjusted_life_years_non_communicable_diseases_sex_both_age_age_standardized_rate")
+
+ncd_wide <- data_ncd_clean %>%  pivot_wider(names_from = entity, 
+                             values_from = DALYS, year) 
+kable(ncd_wide)
+
+
 ```
 
 ## Plot Showing Trends in NCD Burden Over Time 
 
 ```{r}
 # Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color.
+
+ncd_long <-  ncd_wide %>% pivot_longer(names_to = "country",
+                                       values_to = "value", -year)
+
+ncd_long %>% ggplot(aes( y= value, x= year, color= country))+
+  geom_line()+
+  labs(y= "DALYS")+
+  labs(title = "Trends in NCD burden over time by country")
 ```
 
 ## Summary of NCD Burden Findings
 
-Provide a brief analysis based on the data presented in the table and chart. Highlight any significant findings or patterns. About 3 sentences.
+The burden of NCD showed a general decline across all three countries although Cameroon had a higher burden in the year 2000.
 
 
