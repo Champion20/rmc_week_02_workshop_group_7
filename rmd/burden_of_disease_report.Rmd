@@ -2,7 +2,7 @@
 title: "Global Disease Burden Analysis"
 author: "Rosaline, Ijeoma,Elihun"
 output:
- 
+  github_document: default
   github document: default
 ---
 
@@ -12,9 +12,9 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 # Introduction
 
-This document compares the Disability-Adjusted Life Year (DALY) diseases burden for three countries: Cameroon, Benin, and Nigeria. We compare the burden due to communicable, maternal, neonatal, and nutritional diseases (CMNN), non-communicable diseases (NCDs), and overall disease burden for these countries. 
+This document compares the Disability-Adjusted Life Year (DALY) diseases burden for three countries: Cameroon, Benin, and Nigeria. We compare the burden due to communicable, maternal, neonatal, and nutritional diseases (CMNN), non-communicable diseases (NCDs), and overall disease burden for these countries.
 
-The source data is from the Institute for Health Metrics and Evaluation (IHME) Global Burden of Disease (GBD) study. 
+The source data is from the Institute for Health Metrics and Evaluation (IHME) Global Burden of Disease (GBD) study.
 
 ```{r child='cmnn_burden.Rmd'}
 
