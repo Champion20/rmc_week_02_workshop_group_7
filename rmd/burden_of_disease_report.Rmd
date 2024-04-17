@@ -3,7 +3,7 @@ title: "Global Disease Burden Analysis"
 author: "Rosaline, Ijeoma,Elihun"
 output:
   github_document: default
-  github document: default
+  
 ---
 
 ```{r include = F}
