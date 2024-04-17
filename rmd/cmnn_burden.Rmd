@@ -13,14 +13,14 @@ data_cmnn <- read_csv(here("data", "burden-of-disease-cmnn.csv"))
 
 ```{r}
 # Here render a table for the DALY burden over time for the three countries 
+# You should pivot the data to show each country in a separate column.
+# Use kable() from the knitr package to render the table.
 data_group7 <- data_cmnn %>% filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% clean_names() %>% 
   rename(DALYS = "dal_ys_disability_adjusted_life_years_communicable_maternal_neonatal_and_nutritional_diseases_sex_both_age_age_standardized_rate")
 
-# You should pivot the data to show each country in a separate column.
 pivot_group7_wide <- data_group7 %>%  pivot_wider(names_from = entity, 
                              values_from = DALYS, year) 
-# Use kable() from the knitr package to render the table.
- kable(pivot_group7_wide)
+kable(pivot_group7_wide)
 ```
 
 ## Plot Showing Trends in CMNN Burden Over Time
@@ -33,7 +33,7 @@ pivot_group7_long <-  pivot_group7_wide %>% pivot_longer(names_to = "country",
 
 pivot_group7_long %>% ggplot(aes( y= value, x= year, color= country))+
   geom_line()+
-  labs(y= "DALYS")+
+  labs(y= "DALY")+
   labs(title = "Trends in CMNN burden over time by country")
   
 

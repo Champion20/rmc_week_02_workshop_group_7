@@ -14,15 +14,31 @@ data_overall <- read_csv(here("data", "burden-of-disease-all-causes.csv"))
 # Here render a table for the DALY burden over time for the three countries 
 # You should pivot the data to show each country in a separate column.
 # Use kable() from the knitr package to render the table.
+data_overall_clean <- data_overall %>% filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% clean_names() %>% 
+  rename(DALYS = "dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate")
+
+overall_wide <- data_overall_clean %>%  pivot_wider(names_from = entity, 
+                             values_from = DALYS, year) 
+kable(overall_wide)
+
 ```
 
 ## Plot Showing Trends in Overall Disease Burden Over Time
 
 ```{r}
 # Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color.
+
+
+overall_long <-  overall_wide %>% pivot_longer(names_to = "country",
+                                       values_to = "value", -year)
+
+overall_long %>% ggplot(aes( y= value, x= year, color= country))+
+  geom_line()+
+  labs(y= "DALY")+
+  labs(title = "Trends in overall DALY burden over time by country")
 ```
 
 ## Summary of Overall Disease Burden Findings
 
-Provide a brief analysis based on the data presented in the table and chart. Highlight any significant findings or patterns. About 3 sentences.
+Overall there was a decline in the overall burden DALY diseases across all 3 countries.
 

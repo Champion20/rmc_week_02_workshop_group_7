@@ -34,7 +34,7 @@ ncd_long <-  ncd_wide %>% pivot_longer(names_to = "country",
 
 ncd_long %>% ggplot(aes( y= value, x= year, color= country))+
   geom_line()+
-  labs(y= "DALYS")+
+  labs(y= "DALY")+
   labs(title = "Trends in NCD burden over time by country")
 ```
 
