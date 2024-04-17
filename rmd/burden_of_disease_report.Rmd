@@ -1,6 +1,6 @@
 ---
 title: "Global Disease Burden Analysis"
-author: "Rosaline, Ijeoma,Elihun"
+author: "Rosaline, Ijeoma,Elihou"
 output:
   github_document: default
   
