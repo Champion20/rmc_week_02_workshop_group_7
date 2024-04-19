@@ -1,29 +1,68 @@
+---
+title: "Global Disease Burden Analysis"
+author: "Ijeoma Iwuora"
+output: github_document
+---
+
+```{r include = F}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+This document compares the Disability-Adjusted Life Year (DALY) diseases burden for three countries: Benin, Cameroon, and Nigeira. We compare the burden due to communicable, maternal, neonatal, and nutritional diseases (CMNN), non-communicable diseases (NCDs), and overall disease burden for these countries. 
+
+The source data is from the Institute for Health Metrics and Evaluation (IHME) Global Burden of Disease (GBD) study. 
+
+
+
 # Non-Communicable Disease Burden (NCD)
 
 ```{r}
 # Load necessary packages
-pacman::p_load(tidyverse, knitr, here)
+pacman::p_load(tidyverse, knitr, here,janitor)
 
 # Import the non-communicable diseases data
 data_ncd <- read_csv(here("data", "burden-of-disease-ncd.csv"))
+
+
 ```
 
 ## Table of Estimates for NCD Burden Over Time
 
 ```{r}
 # Here render a table for the DALY burden over time for the three countries 
+ncd_estimates <- data_ncd %>% 
+filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% 
+  clean_names()
+
 # You should pivot the data to show each country in a separate column.
+ncd_estimate_wide <- ncd_estimates %>% 
+  pivot_wider(names_from = entity, values_from = dal_ys_disability_adjusted_life_years_non_communicable_diseases_sex_both_age_age_standardized_rate)
+
+
 # Use kable() from the knitr package to render the table.
+kable(ncd_estimate_wide)
 ```
 
 ## Plot Showing Trends in NCD Burden Over Time 
 
 ```{r}
 # Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color.
+
+ggplot(ncd_estimates, aes(x = year, y = dal_ys_disability_adjusted_life_years_non_communicable_diseases_sex_both_age_age_standardized_rate, color = entity)) +
+  geom_line() +
+  labs(title = "Trend of NCD DALY burden for Benin, Nigeria, and Cameroon",
+       x = "Year",
+       y = "DALYs") +
+  theme_minimal() +
+  scale_color_manual(values = c("Benin" = "blue", "Nigeria" = "red", "Cameroon" = "green"))  
 ```
 
 ## Summary of NCD Burden Findings
 
 Provide a brief analysis based on the data presented in the table and chart. Highlight any significant findings or patterns. About 3 sentences.
+
+## Nigeria and Benin have experienced a downward trend since the 1990s, while Cameroon exhibited an upward trend between 1990 and the early 2000s before experiencing a decline. Despite this, Nigeria has the lowest burden of NCD DALYs among the three countries.
 
 
