@@ -42,7 +42,15 @@ ncd_estimate_wide <- ncd_estimates %>%
 
 
 # Use kable() from the knitr package to render the table.
-kable(ncd_estimate_wide)
+
+data_ncd_clean <- data_ncd %>% filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% clean_names() %>% 
+  rename(DALYS = "dal_ys_disability_adjusted_life_years_non_communicable_diseases_sex_both_age_age_standardized_rate")
+
+ncd_wide <- data_ncd_clean %>%  pivot_wider(names_from = entity, 
+                             values_from = DALYS, year) 
+kable(ncd_wide)
+
+
 ```
 
 ## Plot Showing Trends in NCD Burden Over Time 
@@ -57,12 +65,11 @@ ggplot(ncd_estimates, aes(x = year, y = dal_ys_disability_adjusted_life_years_no
        y = "DALYs") +
   theme_minimal() +
   scale_color_manual(values = c("Benin" = "blue", "Nigeria" = "red", "Cameroon" = "green"))  
+
 ```
 
 ## Summary of NCD Burden Findings
 
-Provide a brief analysis based on the data presented in the table and chart. Highlight any significant findings or patterns. About 3 sentences.
-
-## Nigeria and Benin have experienced a downward trend since the 1990s, while Cameroon exhibited an upward trend between 1990 and the early 2000s before experiencing a decline. Despite this, Nigeria has the lowest burden of NCD DALYs among the three countries.
+## The burden of NCD showed a general decline across all three countries although Cameroon had a higher burden in the year 2000. Nigeria and Benin have experienced a downward trend since the 1990s, while Cameroon exhibited an upward trend between 1990 and the early 2000s before experiencing a decline. Despite this, Nigeria has the lowest burden of NCD DALYs among the three countries.
 
 
