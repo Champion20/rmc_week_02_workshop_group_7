@@ -1,8 +1,8 @@
 # Overall Disease Burden
 
-```{r}
+```{r message = FALSE}
 # Load necessary packages
-pacman::p_load(tidyverse, knitr, here)
+pacman::p_load(tidyverse, knitr, here, janitor)
 
 # Import the overall disease data
 data_overall <- read_csv(here("data", "burden-of-disease-all-causes.csv"))
@@ -10,21 +10,38 @@ data_overall <- read_csv(here("data", "burden-of-disease-all-causes.csv"))
 
 ## Table of Estimates for Overall Disease Burden Over Time
 
-```{r}
-# Here render a table for the DALY burden over time for the three countries 
+```{r warning = FALSE}
+# Here render a table for the DALY burden over time for the three countries
+subdata_ovrl <- data_overall %>% 
+  clean_names() %>% 
+  rename(dalys = dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate) %>% 
+  filter(code %in% c("BEN","CMR", "NGA"))
+
 # You should pivot the data to show each country in a separate column.
+subdata_ovrl_wide <- subdata_ovrl %>%  
+  pivot_wider(
+    id_cols = year,
+    names_from = entity,
+    values_from = dalys
+  )
+
 # Use kable() from the knitr package to render the table.
+<<<<<<< Updated upstream
 data_overall_clean <- data_overall %>% filter(Entity %in% c("Benin", "Nigeria", "Cameroon")) %>% clean_names() %>% 
   rename(DALYS = "dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate")
 
 overall_wide <- data_overall_clean %>%  pivot_wider(names_from = entity, 
                              values_from = DALYS, year) 
 kable(overall_wide)
+=======
+kable(subdata_ovrl_wide)
+>>>>>>> Stashed changes
 
 ```
 
 ## Plot Showing Trends in Overall Disease Burden Over Time
 
+<<<<<<< Updated upstream
 ```{r}
 # Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color.
 
@@ -36,6 +53,15 @@ overall_long %>% ggplot(aes( y= value, x= year, color= country))+
   geom_line()+
   labs(y= "DALY")+
   labs(title = "Trends in overall DALY burden over time by country")
+=======
+```{r message = FALSE}
+# Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color
+
+subdata_ovrl %>% 
+  ggplot(aes(x = year, y = dalys, group = entity, color = entity)) +
+    geom_line()
+
+>>>>>>> Stashed changes
 ```
 
 ## Summary of Overall Disease Burden Findings
