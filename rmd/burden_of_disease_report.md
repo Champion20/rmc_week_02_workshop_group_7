@@ -1,6 +1,6 @@
 Global Disease Burden Analysis
 ================
-Rosaline, Ijeoma,Elihun
+Rosaline, Ijeoma, Elihou
 
 # Introduction
 
@@ -60,6 +60,17 @@ A comparison of CMNN disease burden between Cameroon ,Nigeria and Benin
 shows a general downward trend. However, Cameroon had a higher CMNN
 burden in the year 2000.
 
+# Introduction
+
+This document compares the Disability-Adjusted Life Year (DALY) diseases
+burden for three countries: Benin, Cameroon, and Nigeira. We compare the
+burden due to communicable, maternal, neonatal, and nutritional diseases
+(CMNN), non-communicable diseases (NCDs), and overall disease burden for
+these countries.
+
+The source data is from the Institute for Health Metrics and Evaluation
+(IHME) Global Burden of Disease (GBD) study.
+
 # Non-Communicable Disease Burden (NCD)
 
 ## Table of Estimates for NCD Burden Over Time
@@ -99,12 +110,11 @@ burden in the year 2000.
 
 ## Plot Showing Trends in NCD Burden Over Time
 
-![](burden_of_disease_report_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](burden_of_disease_report_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ## Summary of NCD Burden Findings
 
-The burden of NCD showed a general decline across all three countries
-although Cameroon had a higher burden in the year 2000.
+## The burden of NCD showed a general decline across all three countries although Cameroon had a higher burden in the year 2000. Nigeria and Benin have experienced a downward trend since the 1990s, while Cameroon exhibited an upward trend between 1990 and the early 2000s before experiencing a decline. Despite this, Nigeria has the lowest burden of NCD DALYs among the three countries.
 
 # Overall Disease Burden
 
@@ -145,7 +155,7 @@ although Cameroon had a higher burden in the year 2000.
 
 ## Plot Showing Trends in Overall Disease Burden Over Time
 
-![](burden_of_disease_report_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![](burden_of_disease_report_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
 
 ## Summary of Overall Disease Burden Findings
 
